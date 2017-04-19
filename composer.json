@@ -1,5 +1,5 @@
 {
-  "name": "muraveiko/curler",
+  "name": "onassar/php-curler",
   "description": "Adaptation of the onassar/PHP-Curler for composer",
   "minimum-stability": "stable",
   "authors": [
