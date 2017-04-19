@@ -11,10 +11,15 @@
       "name": "Oleg Muraveyko",
       "email": "oleg@muraveyko.ru"
     }
-    ],
-    "autoload": {
-      "psr-4": {
+  ],
+  "autoload": {
+     "psr-4": {
         "Onassar\\PhpCurler\\": "src/"
+     }
+  },
+  "extra": {
+      "branch-alias": {
+        "dev-master": "0.0.1-dev"
       }
-    }
+  }
 }
