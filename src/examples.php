@@ -1,9 +1,10 @@
 <?php
+require_once "../../../autoload.php";
+use Onassar\PhpCurler\Curler;
 
     // Passes
     $curler = new Curler();
     $curler->get('http://www.google.com/');
-
 
     // Passes
     $curler = new Curler(array(

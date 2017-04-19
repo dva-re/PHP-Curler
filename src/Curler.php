@@ -1,10 +1,12 @@
 <?php
-namespace Onsar\PhpCurler;
+namespace Onassar\PhpCurler;
 
     // dependecy check
     if (!in_array('curl', get_loaded_extensions())) {
         throw new Exception('cURL extension needs to be installed.');
     }
+
+
 
     /**
      * Curler
@@ -326,7 +328,7 @@ namespace Onsar\PhpCurler;
         {
             // ensure file is writable
             if (file_exists($this->_cookieStoragePath) === true) {
-                if (posix_access($this->_cookieStoragePath, POSIX_W_OK) === false) {
+                if (! is_writeable($this->_cookieStoragePath)) {
                     throw new Exception(
                         'File *' . ($this->_cookieStoragePath) . '* must be ' .
                         'writable for cookie storage.'

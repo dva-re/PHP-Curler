@@ -21,7 +21,9 @@ accessed through the **getInfo** method.
 <?php
 
     // booting
-    require_once APP . '/vendors/PHP-Curler/src/Curler.class.php';
+    require_once APP . '/vendors/autoload.php';
+    
+    use Onassar\PhpCurler\Curler;
     
     // grab google.com contents and display
     $curler = new Curler();
