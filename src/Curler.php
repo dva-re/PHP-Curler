@@ -1,4 +1,5 @@
 <?php
+namespace Onsar\PhpCurler;
 
     // dependecy check
     if (!in_array('curl', get_loaded_extensions())) {
@@ -143,7 +144,7 @@
          * 
          * @access public
          * @param  array $options (default: array())
-         * @return void
+         *
          */
         public function __construct($options = array())
         {
@@ -319,6 +320,7 @@
          * 
          * @access protected
          * @return void
+         * @throws Exception
          */
         protected function _openCookie()
         {
@@ -540,6 +542,7 @@
          *         bit.ly, but rather whatever site it's being redirect to.
          * @access public
          * @return string|false
+         * @throws Exception
          */
         public function getContentCharset()
         {
@@ -687,7 +690,7 @@
          * 
          * @access public
          * @param  string $url
-         * @param  array $array
+         * @param  array $data
          * @param  boolean $buildQuery (default: true)
          * @return array|false
          */
@@ -842,6 +845,8 @@
          * @param  Object $resource
          * @param  string $data
          * @return integer
+         *
+         * @throws Exception
          */
         public function writeCallback($resource, $data)
         {

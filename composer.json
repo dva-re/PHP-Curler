@@ -1,0 +1,20 @@
+{
+  "name": "muraveiko/curler",
+  "description": "Adaptation of the onassar/PHP-Curler for composer",
+  "minimum-stability": "stable",
+  "authors": [
+    {
+      "name": "Oliver Nassar",
+      "email": "onassar@gmail.com"
+    },
+    {
+      "name": "Oleg Muraveyko",
+      "email": "oleg@muraveyko.ru"
+    }
+    ],
+    "autoload": {
+      "psr-4": {
+        "Onassar\\PhpCurler\\": "src/"
+      }
+    }
+}
