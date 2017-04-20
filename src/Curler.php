@@ -1,5 +1,5 @@
 <?php
-namespace Onassar\PhpCurler;
+namespace Muraveiko\PhpCurler;
 
     // dependecy check
     if (!in_array('curl', get_loaded_extensions())) {

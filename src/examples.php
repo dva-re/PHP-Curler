@@ -1,6 +1,6 @@
 <?php
 require_once "../../../autoload.php";
-use Onassar\PhpCurler\Curler;
+use Muraveiko\PhpCurler\Curler;
 
     // Passes
     $curler = new Curler();

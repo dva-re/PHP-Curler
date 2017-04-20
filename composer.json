@@ -1,7 +1,8 @@
 {
   "name": "muraveiko/php-curler",
+  "type": "library",
   "description": "Adaptation PHP-Curler for composer",
-  "minimum-stability": "stable",
+  "license": "MIT",
   "authors": [
     {
       "name": "Oliver Nassar",
@@ -14,11 +15,16 @@
       "role": "Maintainer"
     }
   ],
+  "require" : {
+    "php" : ">=5.5 || >=7.0",
+    "ext-curl": "*"
+  },
   "autoload": {
      "psr-4": {
-        "Onassar\\PhpCurler\\": "src/"
+        "Muraveiko\\PhpCurler\\": "src/"
      }
   },
+  "minimum-stability": "dev",
   "extra": {
       "branch-alias": {
         "dev-master": "0.0.3-dev"

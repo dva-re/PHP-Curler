@@ -1,6 +1,6 @@
 <?php
 
-namespace Onassar\PhpCurler;
+namespace Muraveiko\PhpCurler;
 
 class Exception extends \Exception
 {

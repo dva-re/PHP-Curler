@@ -1,3 +1,7 @@
+It's my adaptation PHP-Curler for composer.
+
+Source readme ( see  //My fix):
+
 PHP-Curler
 ===
 
@@ -21,9 +25,8 @@ accessed through the **getInfo** method.
 <?php
 
     // booting
-    require_once APP . '/vendors/autoload.php';
-    
-    use Onassar\PhpCurler\Curler;
+    require_once APP . '/vendors/autoload.php'; // My fix
+    use Muraveiko\PhpCurler\Curler; // My fix
     
     // grab google.com contents and display
     $curler = new Curler();
