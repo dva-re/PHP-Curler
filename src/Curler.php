@@ -145,8 +145,15 @@ namespace Muraveiko\PhpCurler;
          * __construct
          * 
          * @access public
-         * @param  array $options (default: array())
-         *
+         * @param  array $options {
+         *   @var  array $authCredentials   [ 'username' => '' , 'password'=>'']
+         *   @var int $maxFilesize
+         *   @var int $maxRedirects
+         *   @var int $timeout
+         *   @var string $userAgent
+         *   @var int[] $validHTTPCodes
+         *   @var string $validMimeTypes
+         * }
          */
         public function __construct($options = array())
         {
@@ -743,6 +750,58 @@ namespace Muraveiko\PhpCurler;
             return $this->_response;
         }
 
+        /**
+         *  xhr with request payload
+         *
+         *  POSTing JSON Data WITH PHP cURL
+         *
+         * @param string $url
+         * @param string $data
+         * @return bool|mixed|String
+         */
+        public function ajax($url, $data){
+            // Invalid, based on a HEAD call
+            $this->head($url);
+            if ($this->_error !== false) {
+                return false;
+            }
+            if ($this->_valid() === false) {
+                return false;
+            }
+
+            /**
+             * Content Type Header
+             *
+             */
+            $mimes = implode(',', $this->getMimes());
+            $this->setHeader('Accept', $mimes);
+            $resource = $this->_getResource($url);
+
+            // Encoding and setting of data
+            curl_setopt($resource, CURLOPT_CUSTOMREQUEST, "POST");
+            curl_setopt($resource, CURLOPT_POSTFIELDS, $data);
+
+            // make the GET call, storing the response; store the info
+            $this->_response = curl_exec($resource);
+            $this->_info = curl_getinfo($resource);
+
+            /**
+             * Native cURL Error
+             *
+             */
+            if ((int) curl_errno($resource) !== 0) {
+                $code = $this->_curlErrors[(int) curl_errno($resource)];
+                $this->_error = array(
+                    'code' => $code,
+                    'message' => curl_error($resource)
+                );
+            }
+
+            // Done
+            $this->_close($resource);
+            return $this->_response;
+
+        }
         /**
          * setCurlOptions
          *
