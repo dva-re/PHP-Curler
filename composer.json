@@ -1,15 +1,17 @@
 {
-  "name": "onassar/php-curler",
-  "description": "Adaptation of the onassar/PHP-Curler for composer",
+  "name": "muraveiko/php-curler",
+  "description": "Adaptation PHP-Curler for composer",
   "minimum-stability": "stable",
   "authors": [
     {
       "name": "Oliver Nassar",
-      "email": "onassar@gmail.com"
+      "email": "onassar@gmail.com",
+      "role": "Developer"
     },
     {
       "name": "Oleg Muraveyko",
-      "email": "oleg@muraveyko.ru"
+      "email": "oleg@muraveyko.ru",
+      "role": "Maintainer"
     }
   ],
   "autoload": {
@@ -19,7 +21,7 @@
   },
   "extra": {
       "branch-alias": {
-        "dev-master": "0.0.2-dev"
+        "dev-master": "0.0.3-dev"
       }
   }
 }
