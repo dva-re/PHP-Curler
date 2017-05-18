@@ -466,16 +466,6 @@ namespace Muraveiko\PhpCurler;
          */
         public function get($url)
         {
-            // Invalid, based on a HEAD call
-            if (is_null($this->_headInfo) === true) {
-                $this->head($url);
-            }
-            if ($this->_error !== false) {
-                return false;
-            }
-            if ($this->_valid() === false) {
-                return false;
-            }
 
             /**
              * Content Type Header
@@ -506,7 +496,7 @@ namespace Muraveiko\PhpCurler;
                 return false;
             }
             $this->_response = $this->_dynamicResponse;
-            $this->_info = curl_getinfo($resource);
+            $this->_headInfo = $this->_info = curl_getinfo($resource);
 
             /**
              * Native cURL Error
@@ -522,6 +512,14 @@ namespace Muraveiko\PhpCurler;
 
             // Done
             $this->_close($resource);
+
+            if ($this->_error !== false) {
+                return false;
+            }
+            if ($this->_valid() === false) {
+                return false;
+            }
+
             return $this->_response;
         }
 
@@ -570,7 +568,7 @@ namespace Muraveiko\PhpCurler;
         }
 
         /**
-         * getError
+         * getError  return array['code'=>,'message'=>]
          * 
          * @access public
          * @return false|array
@@ -705,14 +703,6 @@ namespace Muraveiko\PhpCurler;
          */
         public function post($url, array $data = array(), $buildQuery = true)
         {
-            // Invalid, based on a HEAD call
-            $this->head($url);
-            if ($this->_error !== false) {
-                return false;
-            }
-            if ($this->_valid() === false) {
-                return false;
-            }
 
             /**
              * Content Type Header
@@ -731,7 +721,7 @@ namespace Muraveiko\PhpCurler;
 
             // make the GET call, storing the response; store the info
             $this->_response = curl_exec($resource);
-            $this->_info = curl_getinfo($resource);
+            $this->_headInfo = $this->_info = curl_getinfo($resource);
 
             /**
              * Native cURL Error
@@ -747,6 +737,14 @@ namespace Muraveiko\PhpCurler;
 
             // Done
             $this->_close($resource);
+
+            if ($this->_error !== false) {
+                return false;
+            }
+            if ($this->_valid() === false) {
+                return false;
+            }
+
             return $this->_response;
         }
 
@@ -760,14 +758,6 @@ namespace Muraveiko\PhpCurler;
          * @return bool|mixed|String
          */
         public function ajax($url, $data){
-            // Invalid, based on a HEAD call
-            $this->head($url);
-            if ($this->_error !== false) {
-                return false;
-            }
-            if ($this->_valid() === false) {
-                return false;
-            }
 
             /**
              * Content Type Header
@@ -783,7 +773,7 @@ namespace Muraveiko\PhpCurler;
 
             // make the GET call, storing the response; store the info
             $this->_response = curl_exec($resource);
-            $this->_info = curl_getinfo($resource);
+            $this->_headInfo = $this->_info = curl_getinfo($resource);
 
             /**
              * Native cURL Error
@@ -799,6 +789,14 @@ namespace Muraveiko\PhpCurler;
 
             // Done
             $this->_close($resource);
+
+            if ($this->_error !== false) {
+                return false;
+            }
+            if ($this->_valid() === false) {
+                return false;
+            }
+
             return $this->_response;
 
         }
