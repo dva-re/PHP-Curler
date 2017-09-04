@@ -466,6 +466,8 @@ namespace Muraveiko\PhpCurler;
          */
         public function get($url)
         {
+            // for reuse
+            $this->_dynamicResponse = '';
 
             /**
              * Content Type Header
