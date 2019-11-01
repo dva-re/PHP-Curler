@@ -94,7 +94,8 @@
         "html",
         "text",
         "webpage",
-        "webpages"
+        "webpages",
+        "xml"
     ],
     "text/javascript": [
         "all",
@@ -118,5 +119,10 @@
         "js",
         "json",
         "text"
+    ],
+    "text/xml": [
+        "all",
+        "xml"
     ]
+
 }

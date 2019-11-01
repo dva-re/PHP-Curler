@@ -757,16 +757,23 @@ namespace Muraveiko\PhpCurler;
          *
          * @param string $url
          * @param string $data
+         * @param null|array $header
          * @return bool|mixed|String
          */
-        public function ajax($url, $data){
+        public function ajax($url, $data,$header=null){
 
             /**
              * Content Type Header
              *
              */
-            $mimes = implode(',', $this->getMimes());
-            $this->setHeader('Accept', $mimes);
+            if(!is_null($header) && is_array($header)){
+                foreach ($header as $hn=>$hv){
+                    $this->setHeader($hn, $hv);
+                }
+            }else{
+                $mimes = implode(',', $this->getMimes());
+                $this->setHeader('Accept', $mimes);
+            }
             $resource = $this->_getResource($url);
 
             // Encoding and setting of data
