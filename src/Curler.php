@@ -120,7 +120,8 @@ namespace Muraveiko\PhpCurler;
             'timeout' => 5000,
             'userAgent' =>  'Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US; rv:1.9.2.12) Gecko/20101026 Firefox/3.6.12',
             'validHTTPCodes' => array(200),
-            'validMimeTypes' => 'webpages'
+            'validMimeTypes' => 'webpages',
+            'useCookies' => true
         );
 
         /**
@@ -157,11 +158,6 @@ namespace Muraveiko\PhpCurler;
          */
         public function __construct($options = array())
         {
-            // Cookie path
-            $info = pathinfo(__DIR__);
-            $parent = ($info['dirname']);
-            $this->_cookieStoragePath = ($parent) . '/tmp/cookies.txt';
-
             // Extend options
             $this->_options = array_merge($this->_options, $options);
             $this->_loadMimeMap();
@@ -178,6 +174,13 @@ namespace Muraveiko\PhpCurler;
                 'CURLOPT_FOLLOWLOCATION' => true
                 // 'CURLOPT_MAXREDIRS' => $this->_options['maxRedirects']
             ));
+
+            // Cookie path
+            if ($this->_options['useCookies']) {
+                $info = pathinfo(__DIR__);
+                $parent = ($info['dirname']);
+                $this->_cookieStoragePath = ($parent) . '/tmp/cookies.txt';
+            }
         }
 
         /**
@@ -223,7 +226,8 @@ namespace Muraveiko\PhpCurler;
         protected function _getResource($url, $head = false)
         {
             // ensure cookie is writable by attempting to open it up
-            $this->_openCookie();
+            if (!empty($this->_cookieStoragePath))
+                $this->_openCookie();
 
             // init call, headers, user agent
             $options = $this->_options;
@@ -249,9 +253,11 @@ namespace Muraveiko\PhpCurler;
              * Cookie file / jar
              * 
              */
-            $cookieStoragePath = $this->_cookieStoragePath;
-            curl_setopt($resource, CURLOPT_COOKIEFILE, $cookieStoragePath);
-            curl_setopt($resource, CURLOPT_COOKIEJAR, $cookieStoragePath);
+            if (!empty($this->_cookieStoragePath)) {
+                $cookieStoragePath = $this->_cookieStoragePath;
+                curl_setopt($resource, CURLOPT_COOKIEFILE, $cookieStoragePath);
+                curl_setopt($resource, CURLOPT_COOKIEJAR, $cookieStoragePath);
+            }
 
 
             /**
